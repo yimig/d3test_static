@@ -36,6 +36,11 @@
         .attr('y',scaleLinear(d3.max(dataset))).attr("x",(d,i)=>i*rectWidth)
         .transition().duration(500).delay((d,i)=>i*200)//.ease(d3.easeElasticInOut)
         .attr('height',(d)=>scaleLinear(d)).attr('y',((d)=>scaleLinear(d3.max(dataset))-scaleLinear(d)))
+    d3.selectAll('rect').on('mouseover',function (){
+        d3.select(this).transition().duration(200).attr('fill','red')
+    }).on('mouseout',function () {
+        d3.select(this).transition().duration(200).attr('fill','orange')
+    })
     d3.select('svg').attr("width",(rectWidth)*dataset.length+35).attr("height",scaleLinear(d3.max(dataset))+30)
 
 
