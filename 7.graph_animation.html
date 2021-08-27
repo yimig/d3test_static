@@ -24,12 +24,18 @@
     let yAxis=d3.axisLeft(yScale).ticks(10)
     let g=d3.select('.test').append('svg').append('g')
     dataset.forEach(i=>g.append('rect'))
+
+
     g.attr("width",(rectWidth)*dataset.length).attr('height',scaleLinear(d3.max(dataset)))
-        .selectAll('rect').data(dataset).attr('y',((d)=>scaleLinear(d3.max(dataset))-scaleLinear(d))).attr("x",(d,i)=>i*rectWidth)
-        .attr("height",(d)=>scaleLinear(d)).transition().duration(1000).delay((d,i)=>i*400).ease(d3.easeElasticInOut).attr('height',(d)=>scaleLinear(d))
-    g.selectAll('rect').data(dataset).attr("width",rectWidth-5).attr("fill","orange").attr('transform','translate(35,0)')
-        .insert('text').attr('y',((d)=>scaleLinear(d3.max(dataset))-scaleLinear(d))).attr("x",(d,i)=>i*rectWidth).text((d)=>d)
+        .selectAll('rect').data(dataset)
+        .attr("fill","orange").attr('transform','translate(35,0)')
+        .attr("width",rectWidth-5).attr("height",'0')
+        .attr('y',scaleLinear(d3.max(dataset))).attr("x",(d,i)=>i*rectWidth)
+        .transition().duration(500).delay((d,i)=>i*200)//.ease(d3.easeElasticInOut)
+        .attr('height',(d)=>scaleLinear(d)).attr('y',((d)=>scaleLinear(d3.max(dataset))-scaleLinear(d)))
     d3.select('svg').attr("width",(rectWidth)*dataset.length+35).attr("height",scaleLinear(d3.max(dataset))+30)
+
+
     g.append('g').attr('transform','translate(30,0)').call(yAxis)
     g.append('g').attr('transform','translate(30,'+scaleLinear(d3.max(dataset))+')').call(xAxis)
 </script>
