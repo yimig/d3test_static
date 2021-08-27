@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./script/d3.v7.min.js"></script>
+</head>
+<body>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+</body>
+<script>
+    var str = 'div element'
+    var dataset = ['A']
+    var data_update=d3.selectAll('.test').data(dataset)
+    var data_enter=data_update.enter()
+    var data_exit=data_update.exit()
+    data_update.text(function (d,i) {
+        return i+'. hello world + '+d
+    })
+    data_enter.select('.test').append('div').text(function (d,i) {
+        return i + '. enter_data + '+d
+    })
+    data_exit.append('div').text(function(d,i){
+        return 'exit_data';
+    })
+</script>
+</html>
